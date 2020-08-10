@@ -6,8 +6,14 @@ Examples:
     extractValue(arr,'name') // ['Elie', 'Tim', 'Matt', 'Colt']
 */
 
-function extractValue(arr, key) {}
-
+function extractValue(arr, key) {
+    return arr.reduce(function(total, item) {
+         total.push(item[key]);
+         return total;
+    }, []);
+}
+const arr = [{ name: 'Elie' }, { name: 'Tim' }, { name: 'Matt' }, { name: 'Colt' }]
+console.log(extractValue(arr, 'name')) // ['Elie', 'Tim', 'Matt', 'Colt']
 /*
 Write a function called vowelCount which accepts a string and returns an object with the keys as the vowel and the values as the number of times the vowel appears in the string. This function should be case insensitive so a lowercase letter and uppercase letter should count
 
@@ -19,7 +25,30 @@ Examples:
     vowelCount('I Am awesome and so are you') // {i: 1, a: 4, e: 3, o: 3, u: 1};
 */
 
-function vowelCount(str) {}
+function vowelCount(str) {
+    const vowels = 'aeiou';
+    const arr = str.split('');
+
+    return arr.reduce(function (total, val) {
+        let lowerCase = val.toLowerCase();
+        if (vowels.indexOf(lowerCase) !== -1) {
+            if (total[lowerCase]) {
+                total[lowerCase]++;
+            } else {
+                total[lowerCase] = 1;
+            }   
+        }
+        return total;
+    }, {})
+}
+
+console.log(vowelCount('Elie')) // {e:2,i:1};
+console.log(vowelCount('Tim')) // {i:1};
+console.log(vowelCount('Matt')) // {a:1})
+console.log(vowelCount('hmmm')) // {};
+console.log(vowelCount('I Am awesome and so are you')) // {i: 1, a: 4, e: 3, o: 3, u: 1};
+
+
 
 /*
 Write a function called addKeyAndValue which accepts an array of objects and returns the array of objects passed to it with each object now including the key and value passed to the function.
