@@ -103,4 +103,23 @@ Examples:
     partition(names, isLongerThanThreeCharacters) // [['Elie', 'Colt', 'Matt'], ['Tim']]
 */
 
-function partition(arr, callback) {}
+const names = ["Elie", "Colt", "Tim", "Matt"];
+
+function partition(arr, callback) {
+   return arr.reduce(function(acc, nextVal) {
+       if(callback(nextVal)) {
+           acc[0].push(nextVal);
+       }else {
+           acc[1].push(nextVal);
+       }
+       return acc;
+   }, [[],[]])
+}
+
+
+function isLongerThanThreeCharacters(val) {
+    return val.length > 3;
+}
+
+
+console.log(partition(names, isLongerThanThreeCharacters)) // [['Elie', 'Colt', 'Matt'], ['Tim']]
